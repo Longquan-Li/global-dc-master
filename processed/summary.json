@@ -3,5 +3,9 @@
   "with_coordinates": 2248,
   "with_power_mw": 505,
   "with_area_m2": 0,
-  "countries": 330
+  "countries": 330,
+  "japan_records": 73,
+  "japan_with_power": 28,
+  "compute_atlas_power_observations": 865,
+  "compute_atlas_with_land_area": 438
 }
