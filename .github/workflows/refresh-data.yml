@@ -60,7 +60,7 @@ jobs:
         run: |
           python scripts/build_master.py
           python scripts/enrich_observations.py
-          python scripts/build_operator_queue.py
+          python scripts/build_operator_queue.py\n          python scripts/build_simple_export.py
 
       - name: Commit refreshed data
         shell: bash
