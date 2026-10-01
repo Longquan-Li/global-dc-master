@@ -1,4 +1,4 @@
-name: Refresh DC master data
+name: Build Global DC Facility Database
 
 on:
   push:
@@ -43,7 +43,10 @@ jobs:
 
           date -u +"%Y-%m-%dT%H:%M:%SZ" > raw/retrieved_at_utc.txt
 
-      - name: Build harmonized master
+      - name: Fetch Japan facility detail records
+        run: python scripts/fetch_japan_details.py
+
+      - name: Build harmonized facility database
         run: |
           python scripts/build_master.py
           python scripts/enrich_observations.py
