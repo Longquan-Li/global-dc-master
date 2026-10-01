@@ -61,5 +61,6 @@ jobs:
             echo "No data changes."
           else
             git commit -m "data: refresh open DC snapshots [skip ci]"
+            git pull --rebase origin main
             git push
           fi
