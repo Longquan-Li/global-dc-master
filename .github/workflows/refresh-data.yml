@@ -46,10 +46,18 @@ jobs:
       - name: Fetch Japan facility detail records
         run: python scripts/fetch_japan_details.py
 
+      - name: Fetch supplementary open sources
+        shell: bash
+        run: |
+          python scripts/fetch_china_scidata.py || echo "China ScienceDB fetch incomplete; raw diagnostic retained where available."
+          python scripts/fetch_dset_raw.py || echo "DSET fetch incomplete; raw diagnostic retained where available."
+          python scripts/fetch_osm_datacenters.py || echo "OSM fetch incomplete; workflow continues."
+
       - name: Build harmonized facility database
         run: |
           python scripts/build_master.py
           python scripts/enrich_observations.py
+          python scripts/build_operator_queue.py
 
       - name: Commit refreshed data
         shell: bash
