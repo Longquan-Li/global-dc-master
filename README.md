@@ -57,3 +57,14 @@ The GitHub Action `refresh-data.yml` runs automatically when first added and can
 ## Citation / license
 
 Each upstream dataset retains its own license and provenance. This repository does not relicense upstream data. See `sources/source_manifest.csv` and source repositories before redistribution.
+
+
+## Capacity policy
+
+This database is **reported-capacity only**. It does not estimate MW from area, footprint, operator, market, or statistical models. If a facility has no publicly reported capacity, the capacity field remains blank.
+
+Reported values must retain:
+- source URL
+- source dataset
+- capacity meaning / power type
+- status / as-of date where available
