@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/refresh-data.yml"
+      - "scripts/**"
+      - "sources/**"
+      - "requirements.txt"
   workflow_dispatch:
   schedule:
     - cron: "17 3 1 * *"
