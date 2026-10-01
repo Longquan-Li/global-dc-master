@@ -63,6 +63,14 @@ jobs:
           python scripts/build_operator_queue.py
           python scripts/build_simple_export.py
 
+      - name: Upload simple DC export
+        uses: actions/upload-artifact@v4
+        with:
+          name: reported-power-simple
+          path: processed/reported_power_simple.csv
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Commit refreshed data
         shell: bash
         run: |
