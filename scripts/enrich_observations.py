@@ -8,12 +8,42 @@ OUT = ROOT / "processed"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ---------- Japan Data Center Watch ----------
-jp_path = RAW / "japan_dc_watch" / "facilities.json"
-if jp_path.exists():
-    jp_obj = json.loads(jp_path.read_text(encoding="utf-8"))
-    jp_items = jp_obj.get("items", [])
-    jp_rows = []
-    for r in jp_items:
+jp_detail = RAW / "japan_dc_watch" / "facility_details.json"
+jp_list = RAW / "japan_dc_watch" / "facilities.json"
+jp_rows = []
+
+if jp_detail.exists():
+    detail_obj = json.loads(jp_detail.read_text(encoding="utf-8"))
+    for rec in detail_obj:
+        fac = rec.get("facility", {}) or {}
+        ops = rec.get("operators", []) or []
+        sources = rec.get("sources", []) or []
+        source_url = sources[0].get("canonical_url","") if sources and isinstance(sources[0],dict) else ""
+        jp_rows.append({
+            "source_dataset":"Japan Data Center Watch",
+            "source_record_id":fac.get("slug") or fac.get("id"),
+            "name":fac.get("canonical_name_en") or fac.get("canonical_name"),
+            "operator":"; ".join([o.get("name","") for o in ops if isinstance(o,dict) and o.get("name")]),
+            "country":"Japan",
+            "admin1":fac.get("prefecture"),
+            "city":fac.get("municipality"),
+            "latitude":fac.get("latitude"),
+            "longitude":fac.get("longitude"),
+            "site_area":fac.get("site_area_m2"),
+            "site_area_unit":"m2" if fac.get("site_area_m2") is not None else "",
+            "floor_area":fac.get("floor_area_m2"),
+            "floor_area_unit":"m2" if fac.get("floor_area_m2") is not None else "",
+            "power_mw":fac.get("power_capacity_mw"),
+            "power_type":fac.get("power_capacity_type") or "unknown",
+            "power_method":"reported",
+            "status":fac.get("status"),
+            "confidence":fac.get("evidence_level"),
+            "source_url":source_url or ("https://japandatacenter.org/facilities/" + str(fac.get("slug",""))),
+            "source_asof":fac.get("status_as_of") or fac.get("updated_at"),
+        })
+elif jp_list.exists():
+    jp_obj = json.loads(jp_list.read_text(encoding="utf-8"))
+    for r in jp_obj.get("items", []):
         jp_rows.append({
             "source_dataset":"Japan Data Center Watch",
             "source_record_id":r.get("slug"),
@@ -23,6 +53,10 @@ if jp_path.exists():
             "city":r.get("municipality"),
             "latitude":None,
             "longitude":None,
+            "site_area":None,
+            "site_area_unit":"",
+            "floor_area":None,
+            "floor_area_unit":"",
             "power_mw":r.get("power_capacity_mw"),
             "power_type":r.get("power_capacity_type") or "unknown",
             "power_method":"reported",
@@ -31,8 +65,12 @@ if jp_path.exists():
             "source_url":"https://japandatacenter.org/facilities/" + str(r.get("slug")),
             "source_asof":r.get("status_as_of"),
         })
+
+if jp_rows:
     jp_df = pd.DataFrame(jp_rows)
     jp_df.to_csv(OUT / "japan_observations.csv", index=False)
+    jp_area = jp_df.loc[(jp_df["site_area"].notna()) | (jp_df["floor_area"].notna())].copy()
+    jp_area.to_csv(OUT / "japan_area_observations.csv", index=False)
 
 # ---------- Compute Atlas ----------
 ca_path = RAW / "compute_atlas" / "facilities.json"
