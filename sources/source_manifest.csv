@@ -1,0 +1,6 @@
+source_id,source_name,coverage,canonical_url,raw_url,license,role
+human_override,Human Override,Global,https://github.com/BoVerse-io/human-override,https://raw.githubusercontent.com/BoVerse-io/human-override/main/data/datacenters.csv,ODbL-1.0,global backbone
+atlas,ATLAS Global Data Center Map,Global,https://github.com/Ringmast4r/Global-Data-Center-Map,https://raw.githubusercontent.com/Ringmast4r/Global-Data-Center-Map/main/datacenters.csv,Attribution required,independent location snapshot
+compute_atlas,Compute Atlas,United States,https://github.com/ek33450505/compute-atlas,https://raw.githubusercontent.com/ek33450505/compute-atlas/main/data/facilities.json,CC BY 4.0,data-center power/status provenance
+peeringdb,PeeringDB,Global,https://www.peeringdb.com/,https://www.peeringdb.com/api/fac?limit=10000,PeeringDB terms,facility identity/interconnection
+japan_dc_watch,Japan Data Center Watch,Japan,https://japandatacenter.org/data-access,https://japandatacenter.org/api/v1/facilities,Attribution / research API,regional high-quality area/power
