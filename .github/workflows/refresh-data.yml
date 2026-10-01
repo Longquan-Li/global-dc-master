@@ -44,7 +44,9 @@ jobs:
           date -u +"%Y-%m-%dT%H:%M:%SZ" > raw/retrieved_at_utc.txt
 
       - name: Build harmonized master
-        run: python scripts/build_master.py
+        run: |
+          python scripts/build_master.py
+          python scripts/enrich_observations.py
 
       - name: Commit refreshed data
         shell: bash
