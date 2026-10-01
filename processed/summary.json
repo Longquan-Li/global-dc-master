@@ -1,7 +1,8 @@
 {
   "facilities": 18524,
   "with_coordinates": 2248,
-  "with_power_mw": 505,
+  "with_power_mw": 0,
+  "human_override_power_raw_for_audit": 505,
   "with_area_m2": 0,
   "countries": 330,
   "japan_records": 73,
