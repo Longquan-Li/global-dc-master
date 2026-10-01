@@ -1,4 +1,4 @@
-# Global DC Master Database
+# Global DC Facility Database
 
 Open, auditable facility-level database for data-center **location, area, power capacity and energy-system modelling**.
 
