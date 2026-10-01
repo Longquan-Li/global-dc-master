@@ -1,78 +1,39 @@
-# Capacity estimation framework
+# Reported-capacity-only policy
 
-Goal: produce a usable MW value for every facility while preserving a strict distinction between observed and modeled capacity.
+The Global DC Facility Database does **not** estimate capacity for facilities without a public capacity observation.
 
-## Hierarchy
+## Rules
 
-### Tier 1 — Reported power
-Directly reported IT load or a source with a clearly defined capacity type.
+1. A facility MW value is stored only when an upstream source explicitly reports a capacity.
+2. Missing capacity remains blank.
+3. Area, floor space and footprint are descriptive attributes only and are never converted into MW.
+4. Statistical imputation, market priors and operator-based estimates are excluded.
+5. Reported and source-compiled values must retain provenance and capacity meaning.
 
-Fields:
-- power_mw
-- power_type
-- power_method=reported
-- confidence_high=true
+## Power taxonomy
 
-### Tier 2 — Area-based estimate
-Use a calibrated empirical relationship only when a facility has a defensible building footprint or floor area.
+Reported MW observations should be classified whenever possible as:
 
-Preferred model:
+- `it_load`
+- `facility_total`
+- `utility_supply`
+- `campus_total`
+- `planned_maximum`
+- `unknown`
 
-log(P_IT) = alpha + beta*log(A) + controls
+The database does not convert one category into another.
 
-Controls can include:
-- facility type
-- region/country
-- operator
-- vintage/year built
-- hyperscale/colocation/enterprise
-- status
+## Area
 
-Do not use one universal W/m² coefficient without calibration.
+Area fields may be retained from public sources:
 
-If only footprint is known:
+- site / land area
+- footprint area
+- gross floor area
+- data-hall / whitespace area
 
-floor_area_est = footprint_area * estimated_floor_count
+They are not used to infer power capacity.
 
-Then:
+## Energy
 
-P_IT_est = f(floor_area_est, facility_type, region, vintage)
-
-All assumptions must be retained.
-
-### Tier 3 — Feature-based statistical estimate
-For facilities with no usable area but with metadata, estimate MW from:
-- operator
-- country/market
-- facility type
-- year built
-- status
-- coordinates / metro market
-- known AI workload
-- network/interconnection indicators
-
-### Tier 4 — Fallback imputation
-For records with minimal metadata, allocate capacity using market/type priors and country-level calibration totals.
-
-This gives full coverage but must have the widest uncertainty interval.
-
-## Calibration
-
-Country totals should be benchmarked against government or published industry totals.
-Never force every individual site to a false precision simply to match a national total.
-
-## Output fields
-
-- power_mw_best
-- power_mw_low
-- power_mw_high
-- power_estimation_tier
-- power_estimation_method
-- power_training_sample
-- power_model_version
-- power_source_url
-- power_type
-
-## Important limitation
-
-A building footprint is not equivalent to data-hall floor area. Data-center power density varies substantially across enterprise, colocation, hyperscale and AI facilities. Area can support estimation, but area alone cannot produce equally reliable MW values for every facility.
+Annual electricity is not derived unless a separate analysis explicitly requests it. The facility database itself stores observed/reported infrastructure attributes only.
