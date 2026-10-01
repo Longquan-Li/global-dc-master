@@ -38,7 +38,7 @@ if jp_path.exists():
 ca_path = RAW / "compute_atlas" / "facilities.json"
 if ca_path.exists():
     ca_obj = json.loads(ca_path.read_text(encoding="utf-8"))
-    facilities = ca_obj.get("facilities", ca_obj if isinstance(ca_obj, list) else [])
+    facilities = ca_obj if isinstance(ca_obj, list) else ca_obj.get("facilities", [])
     rows = []
     for r in facilities:
         if r.get("facilityType") != "data_center":
