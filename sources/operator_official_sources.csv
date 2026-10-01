@@ -1,0 +1,11 @@
+operator,official_facility_source,priority,capacity_policy
+Equinix,https://www.equinix.com/data-centers,high,reported_only
+Digital Realty,https://www.digitalrealty.com/data-centers,high,reported_only
+NTT Global Data Centers,https://services.global.ntt/en-us/services-and-products/global-data-centers/global-locations,high,reported_only
+Vantage Data Centers,https://vantage-dc.com/data-center-locations/,high,reported_only
+STACK Infrastructure,https://www.stackinfra.com/locations/,high,reported_only
+AirTrunk,https://airtrunk.com/data-centres/,high,reported_only
+NEXTDC,https://www.nextdc.com/data-centres,high,reported_only
+CyrusOne,https://www.cyrusone.com/data-centers,medium,reported_only
+Colt Data Centre Services,https://www.coltdatacentres.net/data-centres/,medium,reported_only
+PDG,https://princetondg.com/data-centers/,medium,reported_only
