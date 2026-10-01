@@ -32,7 +32,7 @@ master = pd.DataFrame({
     "year_decommissioned": df.get("year_decommissioned"),
     "power_mw": df.get("power_capacity_mw"),
     "power_type": "it_load",
-    "power_method": df.get("power_capacity_mw").notna().map({True:"reported_or_source_compiled",False:""}),
+    "power_method": df.get("power_capacity_mw").notna().map({True:"source_reported_or_compiled",False:""}),
     "pue": df.get("pue"),
     "total_facility_area_m2": df.get("total_area_sqm"),
     "grid_operator": df.get("grid_operator"),
