@@ -137,7 +137,7 @@ if ca_path.exists():
 
 # ---------- Combine source observations ----------
 parts = []
-for fn in ["power_observations.csv","japan_observations.csv","compute_atlas_observations.csv"]:
+for fn in ["japan_observations.csv","compute_atlas_observations.csv"]:
     p = OUT / fn
     if p.exists():
         try:
@@ -149,7 +149,10 @@ if parts:
     norm = []
     for df in parts:
         norm.append(df.reindex(columns=cols))
-    pd.concat(norm, ignore_index=True).to_csv(OUT / "all_power_observations.csv", index=False)
+    reported = pd.concat(norm, ignore_index=True)
+    reported.to_csv(OUT / "reported_power_observations.csv", index=False)
+    # Compatibility alias
+    reported.to_csv(OUT / "all_power_observations.csv", index=False)
 
 # ---------- Summary enrichment ----------
 summary_path = OUT / "summary.json"
