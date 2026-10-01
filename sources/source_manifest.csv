@@ -4,3 +4,6 @@ atlas,ATLAS Global Data Center Map,Global,https://github.com/Ringmast4r/Global-D
 compute_atlas,Compute Atlas,United States,https://github.com/ek33450505/compute-atlas,https://raw.githubusercontent.com/ek33450505/compute-atlas/main/data/facilities.json,CC BY 4.0,data-center power/status provenance
 peeringdb,PeeringDB,Global,https://www.peeringdb.com/,https://www.peeringdb.com/api/fac?limit=10000,PeeringDB terms,facility identity/interconnection
 japan_dc_watch,Japan Data Center Watch,Japan,https://japandatacenter.org/data-access,https://japandatacenter.org/api/v1/facilities,Attribution / research API,regional high-quality area/power
+china_scidata_2026,China large-scale DC Scientific Data 2026,China,https://www.nature.com/articles/s41597-026-07548-x,https://doi.org/10.57760/sciencedb.32970,Repository-specific terms / article CC BY-NC-ND,1005 verified facility locations and environmental attributes
+dset_sg_my,DSET Data Center Dashboard,Singapore + Malaysia,https://sedc.dset.tw/,https://sedc.dset.tw/client.zst,Research/informational use,178 facilities with location ownership reported/estimated power
+osm_dc,OpenStreetMap data centers,Global,https://wiki.openstreetmap.org/wiki/Tag:telecom=data_center,https://overpass-api.de/api/interpreter,ODbL,building polygons and footprint geometry
